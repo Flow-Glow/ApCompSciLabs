@@ -1,49 +1,49 @@
-import gpdraw.*;
+import gpdraw.SketchPad;
+import gpdraw.DrawingTool;
 
-public class House {
-    private DrawingTool pen = new DrawingTool(new SketchPad(400, 400));
-    private int sideLength = 100;
-
+public class DrawHouse {
     public static void main(String[] args) {
-        House house = new House();
-        house.draw();
-    }
+        // Create a SketchPad object with a 500x500 drawing area
+        SketchPad paper = new SketchPad(500, 500);
 
-    public void draw() {
-        drawSquare();
-        drawTriangle();
-        drawDoor();
-    }
+        // Create a DrawingTool object to draw on the SketchPad
+        DrawingTool pen = new DrawingTool(paper);
 
-    private void drawSquare() {
+        // Set the pen's initial position
         pen.up();
-        pen.move(-sideLength / 2, -sideLength / 2);
+        pen.move(-50, -50); // Adjust the values to center the house horizontally
         pen.down();
-        for (int i = 0; i < 4; i++) {
-            pen.forward(sideLength);
-            pen.turnRight(90);
-        }
-    }
 
-    private void drawTriangle() {
-        pen.up();
-        pen.move(-sideLength / 2, sideLength / 2);
-        pen.down();
-        pen.turnRight(45);
-        pen.forward(sideLength * Math.sqrt(2));
-        pen.turnRight(90);
-        pen.forward(sideLength * Math.sqrt(2));
-        pen.turnRight(135);
-    }
+        // Draw the house's body
+        pen.drawRect(200, 200); // Adjust the values to control the size of the house
 
-    private void drawDoor() {
+        // Draw the sloped roof
         pen.up();
-        pen.move(-sideLength / 4, -sideLength / 2);
+        pen.move(0, 200); // Move to the top-left corner of the house
         pen.down();
-        pen.forward(sideLength / 2);
-        pen.turnRight(90);
-        pen.forward(sideLength * 0.6);
-        pen.turnRight(90);
-        pen.forward(sideLength / 2);
+        pen.drawLine(100, 100); // Draw the left side of the roof
+        pen.drawLine(100, -100); // Draw the right side of the roof
+
+        // Draw the door
+        pen.up();
+        pen.move(75, 0); // Move to the center of the house
+        pen.down();
+        pen.drawRect(50, 100); // Adjust the values to control the door's size
+
+        // Draw windows (you can add more if needed)
+        // Window 1
+        pen.up();
+        pen.move(25, 125); // Adjust the coordinates as needed
+        pen.down();
+        pen.drawRect(50, 50); // Adjust the size of the window
+
+        // Window 2
+        pen.up();
+        pen.move(125, 125); // Adjust the coordinates as needed
+        pen.down();
+        pen.drawRect(50, 50); // Adjust the size of the window
+
+        // Close the drawing window when done (optional)
+        paper.close();
     }
 }
