@@ -2,7 +2,7 @@ import gpdraw.*;
 
 public class House {
     private DrawingTool pen = new DrawingTool(new SketchPad(400, 400));
-    private int length = 100;
+    private int sideLength = 100;
 
     public static void main(String[] args) {
         House house = new House();
@@ -10,60 +10,40 @@ public class House {
     }
 
     public void draw() {
-        drawBase();
-        drawRoof();
+        drawSquare();
+        drawTriangle();
         drawDoor();
-        drawWindows();
     }
 
-    private void drawBase() {
+    private void drawSquare() {
         pen.up();
-        pen.move(0, 0);
+        pen.move(-sideLength / 2, -sideLength / 2);
         pen.down();
-        pen.forward(length * 2); // Adjust the length to set the base width
-        pen.turnRight(90);
-        pen.forward(length * 1.5); // Adjust the length to set the base height
-        pen.turnRight(90);
-        pen.forward(length * 2);
-        pen.turnRight(90);
-        pen.forward(length * 1.5);
+        for (int i = 0; i < 4; i++) {
+            pen.forward(sideLength);
+            pen.turnRight(90);
+        }
     }
 
-    private void drawRoof() {
+    private void drawTriangle() {
         pen.up();
-        pen.move(0, length * 1.5);
+        pen.move(-sideLength / 2, sideLength / 2);
         pen.down();
-        pen.turnLeft(45);
-        pen.forward(length * 2.12); // Adjust the length to set the roof diagonal
-        pen.turnLeft(90);
-        pen.forward(length * 2.12);
-        pen.turnLeft(135);
+        pen.turnRight(45);
+        pen.forward(sideLength * Math.sqrt(2));
+        pen.turnRight(90);
+        pen.forward(sideLength * Math.sqrt(2));
+        pen.turnRight(135);
     }
 
     private void drawDoor() {
         pen.up();
-        pen.move(length * 0.75, 0);
+        pen.move(-sideLength / 4, -sideLength / 2);
         pen.down();
-        pen.forward(length * 0.5); // Adjust the length to set the door width
+        pen.forward(sideLength / 2);
         pen.turnRight(90);
-        pen.forward(length);
+        pen.forward(sideLength * 0.6);
         pen.turnRight(90);
-        pen.forward(length * 0.5);
-    }
-
-    private void drawWindows() {
-        // Draw windows on the sides of the house
-        for (int i = 0; i < 2; i++) {
-            pen.up();
-            pen.move(length * 0.2 + i * length * 1.6, length * 0.5);
-            pen.down();
-            pen.drawRect(length * 0.6, length * 0.6); // Adjust the size of the windows
-        }
-
-        // Draw a window on the roof
-        pen.up();
-        pen.move(length * 0.75, length * 1.5);
-        pen.down();
-        pen.drawRect(length * 0.5, length * 0.5); // Adjust the size of the window
+        pen.forward(sideLength / 2);
     }
 }
