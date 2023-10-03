@@ -1,6 +1,6 @@
 import gpdraw.*;
 
-public class TurtleDrawing {
+public class House {
     public static void main(String[] args) {
         DrawingTool pen = new DrawingTool(new SketchPad(400, 400)); // Adjust the size as needed
 
