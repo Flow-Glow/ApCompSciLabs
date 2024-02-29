@@ -70,6 +70,6 @@ public class Statistics {
         System.out.printf("Average: %.2f\n", average);
         System.out.printf("Standard Deviation: %.2f\n", standardDeviation);
          System.out.println("Mode: " + findMode(myData));
-        System.out.println("By: Aidan Zap");
+        System.out.println("By: Ziv Landau");
     }
 }
